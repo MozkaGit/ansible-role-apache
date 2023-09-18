@@ -1,0 +1,8 @@
+---
+# defaults file for ansible-apache-role
+system_user: vagrant
+container_name: apache
+exposed_ports: "80:80"
+bind_mount: /home/vagrant/index.html:/usr/local/apache2/htdocs/index.html
+template_dest: /home/vagrant/index.html
+credentials_vault_file_dest: roles/ansible-apache-role/files/secrets/credentials.vault

@@ -1,0 +1,24 @@
+---
+- hosts: prod
+  become: true
+  vars:
+    system_user: vagrant
+  vars_files:
+    - "{{ credentials_vault_file_dest }}"
+  pre_tasks:
+    - name: Install EPEL repo
+      package: name=epel-release state=present
+      when: ansible_distribution == "CentOS"
+
+    - name: download pip script
+      get_url:
+        url: https://bootstrap.pypa.io/pip/2.7/get-pip.py 
+        dest: /tmp/get-pip.py 
+
+    - name: install python-pip
+      command: python2.7 /tmp/get-pip.py
+
+    - name: Install docker python
+      pip: name=docker-py
+  roles:
+    - ansible-apache-role
