@@ -1,22 +1,30 @@
 Ansible Apache<br/>[![Push to Galaxy](https://github.com/MozkaGit/ansible-role-apache/actions/workflows/push_to_galaxy.yml/badge.svg)](https://github.com/MozkaGit/ansible-role-apache/actions/workflows/push_to_galaxy.yml)
 =========
 
-A brief description of the role goes here.
+This Ansible role lets you deploy an Apache server.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Ansible 2.1 or later.
+- The target host must be CentOS, as the role installs the EPEL repository for CentOS.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Here are the variables available to customize this role:
+
+- system_user: System user (default: vagrant).
+- container_name: Container name (default: apache).
+- exposed_ports: Exposed ports (default: 80:80).
+- bind_mount: Bind mount (default: /home/vagrant/index.html:/usr/local/apache2/htdocs/index.html).
+- template_dest: Template destination (default: /home/vagrant/index.html).
+- credentials_vault_file_dest: Destination of credentials vault file (default: roles/ansible-apache-role/files/secrets/credentials.vault).
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
@@ -25,14 +33,14 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - ansible-apache-role
 
 License
 -------
 
-BSD
+MIT / BSD
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role was created by MozkaGit.
